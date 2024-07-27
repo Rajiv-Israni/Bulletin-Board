@@ -1,0 +1,13 @@
+Our sync protocol is simillar to the client protocol. It again uses txt messages,
+but each message is prefixed with SYNC_. For example, we have SYNC_WRITE, SYNC_REPLACE,
+SYNC_ABORT, SYNC_ON and SYNC_OFF.
+
+  Each message reply is ACK or NACK, depending on the return value of sent command.
+
+  This is the sequence of synchronization commands:
+  SYNC_ON
+  SYNC_WRITE | SYNC_REPLACE
+  SYNC_OFF | SYNC_ABORT
+
+  The originating server, creates the text messagem and send it to each peer. Then it loops,
+until timeout, or until he has received ACK/NACK responses, from all.
